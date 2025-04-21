@@ -18,4 +18,13 @@ ORDER BY total_sales DESC
 SELECT EXTRACT(MONTH FROM order_date) as month, EXTRACT(YEAR FROM order_date) AS year, SUM(sales) AS total_sales 
 FROM superstore
 GROUP BY month, year
-ORDER BY year ASC , month ASC
+ORDER BY year ASC , month ASC 
+
+
+--top 5 customers based on total profit
+
+SELECT customer_id, customer_name,  SUM (profit) AS total_profit
+FROM superstore
+GROUP BY customer_name, customer_id
+ORDER BY total_profit DESC
+LIMIT 5
