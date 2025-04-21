@@ -39,3 +39,19 @@ GROUP BY customer_id, order_id, customer_name
 ) AS order_summary
 GROUP BY customer_id
 ORDER BY AVG_order_profit DESC LIMIT 5 
+
+
+-- What shipping mode is used most often?
+SELECT ship_mode, COUNT (ship_mode) high_ship_mode 
+FROM superstore
+GROUP BY ship_mode
+ORDER BY high_ship_mode DESC  
+
+
+--  percentage of total orders that each shipping mode represents. 
+SELECT ship_mode, COUNT (*) * 100/ SUM(COUNT(*)) OVER () AS ship_mode_percentage
+FROM superstore
+GROUP BY ship_mode
+ORDER BY ship_mode_percentage DESC
+
+
