@@ -27,4 +27,15 @@ SELECT customer_id, customer_name,  SUM (profit) AS total_profit
 FROM superstore
 GROUP BY customer_name, customer_id
 ORDER BY total_profit DESC
-LIMIT 5
+LIMIT 5 
+
+
+-- Average profit for each customer
+SELECT customer_id, AVG(order_profit) as AVG_order_profit 
+FROM ( 
+SELECT customer_id, customer_name, order_id, SUM(profit) AS order_profit
+FROM superstore 
+GROUP BY customer_id, order_id, customer_name
+) AS order_summary
+GROUP BY customer_id
+ORDER BY AVG_order_profit DESC LIMIT 5 
