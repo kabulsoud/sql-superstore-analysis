@@ -62,3 +62,12 @@ GROUP BY category, sub_category
 ORDER BY AVG_profit ASC
 
 
+-- Regions that generate the highest total sales. 
+SELECT region, ROUND (SUM(sales), 2) AS total_sales, ROUND (SUM(profit),2) AS total_profit 
+FROM superstore
+GROUP BY region
+ORDER BY total_sales DESC  
+
+
+
+
