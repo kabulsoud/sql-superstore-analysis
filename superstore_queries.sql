@@ -68,6 +68,10 @@ FROM superstore
 GROUP BY region
 ORDER BY total_sales DESC  
 
-
+-- sub-category with the highest average discount 
+SELECT sub_category, ROUND(AVG(discount),2) as AVG_discount, ROUND(AVG(profit),2) AS AVG_profit
+FROM superstore 
+GROUP BY sub_category
+ORDER BY AVG_discount DESC  
 
 
