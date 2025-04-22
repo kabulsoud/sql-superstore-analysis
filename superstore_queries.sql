@@ -55,3 +55,10 @@ GROUP BY ship_mode
 ORDER BY ship_mode_percentage DESC
 
 
+-- product categories have the lowest average profit 
+SELECT category, sub_category, AVG(profit) as AVG_profit
+FROM superstore
+GROUP BY category, sub_category
+ORDER BY AVG_profit ASC
+
+
