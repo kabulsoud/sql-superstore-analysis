@@ -75,3 +75,24 @@ GROUP BY sub_category
 ORDER BY AVG_discount DESC  
 
 
+-- top 10 cities with the highest number of orders that resulted in a loss
+WITH loss AS 
+( 
+    SELECT order_id, city, SUM (profit) AS total_profit 
+    FROM superstore 
+    GROUP BY order_id, city
+    HAVING SUM(profit) < 0
+) 
+
+SELECT city, 
+        COUNT(order_id) loss_order_count,
+        SUM(total_profit) AS total_loss
+FROM loss 
+GROUP BY city
+ORDER BY loss_order_count DESC 
+LIMIT 10;
+
+
+
+
+
