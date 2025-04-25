@@ -93,6 +93,29 @@ ORDER BY loss_order_count DESC
 LIMIT 10;
 
 
+-- Scenario: Classifying Customer Value Tiers
+-- The marketing team wants to segment customers into value categories based on their profitability:
+-- High-Value: Total profit > 5000
+-- Mid-Value: Total profit between 0 and 5000
+-- Loss-Making: Total profit < 0
+-- Task:
+-- For each customer, show:
+-- Customer ID Customer Name Total Sales Total Profit Total Orders Value Category (use CASE WHEN logic)
+-- Then:
+-- Sort by total_profit in descending order. 
+
+SELECT COUNT(DISTINCT order_id) AS order_count, customer_id, customer_name, SUM(sales) AS total_sales, SUM(profit) AS total_profit,
+CASE 
+    WHEN SUM(profit) > 5000 THEN 'High-Value Customer'
+    WHEN SUM(profit) BETWEEN 0 AND 5000 THEN 'Mid-Value Customer'
+    ELSE 'Loss-Making Customer'
+END  AS customersCategorization
+FROM superstore
+GROUP BY customer_id, customer_name
+HAVING SUM(sales) > 10000 
+ORDER BY total_profit DESC   
+
+
 
 
 
