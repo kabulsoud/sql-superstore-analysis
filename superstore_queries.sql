@@ -116,6 +116,16 @@ HAVING SUM(sales) > 10000
 ORDER BY total_profit DESC   
 
 
+-- products have been ordered more than 25 times with an average discount greater than 1%
+
+SELECT COUNT(DISTINCT order_id) AS order_count,
+product_name, ROUND(AVG(discount),2) AS average_discount
+FROM superstore
+GROUP BY product_name
+HAVING COUNT(DISTINCT order_id) > 25 AND AVG(discount) > 0.01
+ORDER BY order_count DESC
+
+
 
 
 
