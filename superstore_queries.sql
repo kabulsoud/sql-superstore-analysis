@@ -126,6 +126,15 @@ HAVING COUNT(DISTINCT order_id) > 25 AND AVG(discount) > 0.01
 ORDER BY order_count DESC
 
 
+--  sub-categories that  have generated over $50,000 in total sales with  an average profit per order lower than $20.
+SELECT COUNT(DISTINCT order_id) AS order_count, sub_category, SUM(sales) AS total_sales,
+ROUND(AVG(profit),2) as average_profit, ROUND(SUM(profit)/COUNT(DISTINCT order_id),2) as average_profit_per_order
+FROM superstore
+GROUP BY sub_category
+HAVING SUM(sales) > 50000 AND SUM(profit)/COUNT(DISTINCT order_id) < 20
+ORDER BY average_profit_per_order DESC
+
+
 
 
 
